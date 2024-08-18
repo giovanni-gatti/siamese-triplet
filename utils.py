@@ -130,6 +130,11 @@ def semihard_negative(loss_values, margin):
     return np.random.choice(semihard_negatives) if len(semihard_negatives) > 0 else None
 
 
+def hard_semihard_negative(loss_values, margin): # for each positive-anchor pair, pick the hardest negative which lies within the margin but is further away from the anchor compared to the positive
+    semihard_negatives = np.where(np.logical_and(loss_values < margin, loss_values > 0))[0]
+    return semihard_negatives[np.argmax(loss_values[semihard_negatives])] if len(semihard_negatives) > 0 else None
+
+
 class FunctionNegativeTripletSelector(TripletSelector):
     """
     For each positive pair, takes the hardest negative sample (with the greatest triplet loss value) to create a triplet
@@ -191,4 +196,8 @@ def RandomNegativeTripletSelector(margin, cpu=False): return FunctionNegativeTri
 
 def SemihardNegativeTripletSelector(margin, cpu=False): return FunctionNegativeTripletSelector(margin=margin,
                                                                                   negative_selection_fn=lambda x: semihard_negative(x, margin),
+                                                                                  cpu=cpu)
+
+def HardSemihardNegativeTripletSelector(margin, cpu=False): return FunctionNegativeTripletSelector(margin=margin,
+                                                                                  negative_selection_fn=lambda x: hard_semihard_negative(x, margin),
                                                                                   cpu=cpu)

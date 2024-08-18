@@ -34,7 +34,7 @@ For pytorch 0.3 compatibility checkout tag torch-0.3.1
   - *PairSelector* - abstract class defining objects generating pairs based on embeddings and ground truth class labels. Can be used with *OnlineContrastiveLoss*.
     - *AllPositivePairSelector, HardNegativePairSelector* - PairSelector implementations
   - *TripletSelector* - abstract class defining objects generating triplets based on embeddings and ground truth class labels. Can be used with *OnlineTripletLoss*.
-    - *AllTripletSelector*, *HardestNegativeTripletSelector*, *RandomNegativeTripletSelector*, *SemihardNegativeTripletSelector* - TripletSelector implementations
+    - *AllTripletSelector*, *HardestNegativeTripletSelector*, *RandomNegativeTripletSelector*, *SemihardNegativeTripletSelector*, *HardSemihardNegativeTripletSelector* - TripletSelector implementations
 
 # Examples - MNIST
 
